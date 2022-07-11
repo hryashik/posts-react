@@ -1,0 +1,7 @@
+.btn {
+	background: none;
+	padding: 5px 15px;
+	color: black;
+	border: 2px solid cornflowerblue;
+	cursor: pointer;
+}
