@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import './App.css'
 import MyInput from './components/commons/MyInput/MyInput';
 import MySelect from './components/commons/MySelect/MySelect';
@@ -29,19 +29,31 @@ function App() {
 	}
 
 	//СЕЛЕКТ
-	const [selectedSort, setSelectedSort] = useState('none')
+	const [selectedSort, setSelectedSort] = useState('')
 	const options = [
 		{ value: 'title', name: 'По названию' },
 		{ value: 'body', name: 'По описанию' }
 	]
-	function sortPosts(sortType) {
+	function changeSort(sortType) {
 		setSelectedSort(sortType)
 	}
+
 	// Записываю отсортированные посты сразу в переменную и передаю уже компонентам
-	const sortedPosts = [...posts].sort((a, b) => a[selectedSort]?.localeCompare(b[selectedSort]))
+	const sortedPosts = useMemo(() => {
+		console.log('get sorted posts')
+		if (selectedSort) {
+			return [...posts].sort((a, b) => a[selectedSort]?.localeCompare(b[selectedSort]))
+		}
+		return posts
+	}, [posts, selectedSort])
 
 	//ПОИСК ИНПУТ
 	const [searchQuery, setSearchQuery] = useState('');
+
+	//Фильтрую отсортированный массив и передаю в компоненту
+	const sortedAndFiltredPosts = useMemo(() => {
+		return sortedPosts.filter(post => post.title.toLowerCase().includes(searchQuery.toLowerCase()))
+	}, [sortedPosts, searchQuery])
 
 	return (
 		<div className='App'>
@@ -52,17 +64,17 @@ function App() {
 			/>
 			<div className="sortWrapper">
 				<MyInput
-					placeholder="Поиск..."
+					placeholder="Поиск по названию..."
 					value={searchQuery}
 					onChange={e => setSearchQuery(e.target.value)} />
 				<MySelect
-					changeSelect={sortPosts}
+					changeSelect={changeSort}
 					options={options}
 					selectedSort={selectedSort}
 				/>
 			</div>
 			<PostList
-				posts={sortedPosts}
+				posts={sortedAndFiltredPosts}
 				deletePost={deletePost}
 			/>
 		</div>
