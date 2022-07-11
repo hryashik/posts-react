@@ -1,7 +1,8 @@
 .btn {
 	background: none;
-	padding: 5px 15px;
+	padding: 10px 15px;
 	color: black;
 	border: 2px solid cornflowerblue;
 	cursor: pointer;
+	font-size: 15px;
 }

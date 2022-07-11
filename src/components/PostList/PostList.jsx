@@ -16,8 +16,6 @@ function PostList({ posts, deletePost }) {
 						/>)}
 				</div>
 				: <h2>Список постов пуст!</h2>}
-
-
 		</div>
 
 	);
