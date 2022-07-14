@@ -1,8 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import './App.css'
-import MyInput from './components/commons/MyInput/MyInput';
-import MySelect from './components/commons/MySelect/MySelect';
 import FormCreatePost from './components/FormCreatePost/FormCreatePost';
+import PostFilter from './components/PostFilter/PostFilter';
 import PostList from './components/PostList/PostList';
 
 function App() {
@@ -13,6 +12,8 @@ function App() {
 		{ id: 3, title: 'React', body: 'Library' },
 		{ id: 4, title: 'Vue', body: 'Framework' },
 	])
+	const [filter, setFilter] = useState({ sort: '', query: '' })
+
 	function addPost(e) {
 		e.preventDefault()
 		setPosts([...posts, { ...formData, id: Date.now() }])
@@ -28,32 +29,19 @@ function App() {
 		setFormData(newFormData)
 	}
 
-	//СЕЛЕКТ
-	const [selectedSort, setSelectedSort] = useState('')
-	const options = [
-		{ value: 'title', name: 'По названию' },
-		{ value: 'body', name: 'По описанию' }
-	]
-	function changeSort(sortType) {
-		setSelectedSort(sortType)
-	}
-
 	// Записываю отсортированные посты сразу в переменную и передаю уже компонентам
 	const sortedPosts = useMemo(() => {
 		console.log('get sorted posts')
-		if (selectedSort) {
-			return [...posts].sort((a, b) => a[selectedSort]?.localeCompare(b[selectedSort]))
+		if (filter.sort) {
+			return [...posts].sort((a, b) => a[filter.sort]?.localeCompare(b[filter.sort]))
 		}
 		return posts
-	}, [posts, selectedSort])
-
-	//ПОИСК ИНПУТ
-	const [searchQuery, setSearchQuery] = useState('');
+	}, [posts, filter.sort])
 
 	//Фильтрую отсортированный массив и передаю в компоненту
 	const sortedAndFiltredPosts = useMemo(() => {
-		return sortedPosts.filter(post => post.title.toLowerCase().includes(searchQuery.toLowerCase()))
-	}, [sortedPosts, searchQuery])
+		return sortedPosts.filter(post => post.title.toLowerCase().includes(filter.query.toLowerCase()))
+	}, [sortedPosts, filter.query])
 
 	return (
 		<div className='App'>
@@ -62,17 +50,7 @@ function App() {
 				onChange={onChange}
 				addPost={addPost}
 			/>
-			<div className="sortWrapper">
-				<MyInput
-					placeholder="Поиск по названию..."
-					value={searchQuery}
-					onChange={e => setSearchQuery(e.target.value)} />
-				<MySelect
-					changeSelect={changeSort}
-					options={options}
-					selectedSort={selectedSort}
-				/>
-			</div>
+			<PostFilter filter={filter} setFilter={setFilter} />
 			<PostList
 				posts={sortedAndFiltredPosts}
 				deletePost={deletePost}
