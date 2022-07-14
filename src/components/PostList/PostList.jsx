@@ -15,7 +15,7 @@ function PostList({ posts, deletePost }) {
 							deletePost={deletePost}
 						/>)}
 				</div>
-				: <h2>Список постов пуст!</h2>}
+				: <h3>Посты не найдены!</h3>}
 		</div>
 
 	);

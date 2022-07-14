@@ -1,11 +1,12 @@
 .form {
 	display: flex;
 	flex-direction: column;
+}
+
+.form input {
 	margin-bottom: 10px;
 }
-.form input{
-	margin-bottom: 10px;
-}
+
 .form :nth-child(3) {
-	align-self:flex-end;
+	align-self: flex-end;
 }

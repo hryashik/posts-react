@@ -1,0 +1,30 @@
+.modalWrapper {
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.5);
+	display: none;
+}
+
+.modalContent {
+	padding: 20px;
+	width: 450px;
+	background-color: white;
+	border-radius: 10px;
+}
+
+.modalContent input {
+	border-radius: 10px;
+}
+
+.modalContent button {
+	border-radius: 10px;
+}
+
+.active {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
