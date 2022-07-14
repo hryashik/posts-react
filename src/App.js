@@ -1,19 +1,29 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css'
+import { ServiceApi } from './components/API/serviceApi';
 import MyButton from './components/commons/MyButton/MyButton';
 import MyModal from './components/commons/MyModal/MyModal';
+import PreLoader from './components/commons/Preloader/Preloader';
 import FormCreatePost from './components/FormCreatePost/FormCreatePost';
+import { usePosts } from './components/hooks/usePosts';
 import PostFilter from './components/PostFilter/PostFilter';
 import PostList from './components/PostList/PostList';
 
 function App() {
+	function fetchPosts() {
+		setIsLoading(true)
+		setTimeout(async () => {
+			const posts = await ServiceApi.getPosts()
+			setPosts(posts)
+			setIsLoading(false)
+		}, 1500)
+
+	}
 	// ПОСТЫ
-	const [posts, setPosts] = useState([
-		{ id: 1, title: 'ARARARA', body: 'ZXCSADQWE' },
-		{ id: 2, title: 'ABABABABA', body: 'ZXCSADQWExzc' },
-		{ id: 3, title: 'React', body: 'Library' },
-		{ id: 4, title: 'Vue', body: 'Framework' },
-	])
+	useEffect(() => {
+		fetchPosts()
+	}, []);
+	const [posts, setPosts] = useState([])
 
 	function addPost(e) {
 		e.preventDefault()
@@ -32,24 +42,17 @@ function App() {
 		setFormData(newFormData)
 	}
 
+	//Фильтр
 	const [filter, setFilter] = useState({ sort: '', query: '' })
 
-	// Записываю отсортированные посты сразу в переменную и передаю уже компонентам
-	const sortedPosts = useMemo(() => {
-		console.log('get sorted posts')
-		if (filter.sort) {
-			return [...posts].sort((a, b) => a[filter.sort]?.localeCompare(b[filter.sort]))
-		}
-		return posts
-	}, [posts, filter.sort])
-
-	//Фильтрую отсортированный массив и передаю в компоненту
-	const sortedAndFiltredPosts = useMemo(() => {
-		return sortedPosts.filter(post => post.title.toLowerCase().includes(filter.query.toLowerCase()))
-	}, [sortedPosts, filter.query])
+	//Вызываю кастомный хук и записываю отсортированный массив в перемнную, чтобы потом передать в компоненту
+	const sortedAndFiltredPosts = usePosts(posts, filter.sort, filter.query);
 
 	//Модальное окно
 	const [visible, setVisible] = useState(false);
+
+	//Переключатель фетчинга постов
+	const [isLoading, setIsLoading] = useState(false);
 
 	return (
 		<div className={'App'}>
@@ -63,12 +66,17 @@ function App() {
 			<div className='AppContent'>
 				<MyButton
 					style={{ marginBottom: '10px' }}
-					onClick={() => setVisible(true)}>Создать пост
+					onClick={() => setVisible(true)}
+				>
+					Создать пост
 				</MyButton>
 				<PostFilter filter={filter} setFilter={setFilter} />
-				<PostList
-					posts={sortedAndFiltredPosts}
-					deletePost={deletePost} />
+				{isLoading ? <div className='preloader'><PreLoader /></div>
+					: <PostList
+						posts={sortedAndFiltredPosts}
+						deletePost={deletePost}
+					/>
+				}
 			</div>
 		</div>
 

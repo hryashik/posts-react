@@ -1,4 +1,5 @@
 import React from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Post from '../Post/Post';
 import style from './PostList.module.css'
 
@@ -6,15 +7,20 @@ function PostList({ posts, deletePost }) {
 	return (
 		<div className={style.postList}>
 			{posts.length ?
-				<div>
+				<TransitionGroup>
 					{posts.map((post, index) =>
-						<Post
-							{...post}
+						<CSSTransition
 							key={post.id}
-							index={index + 1}
-							deletePost={deletePost}
-						/>)}
-				</div>
+							timeout={500}
+							classNames="post"
+						>
+							<Post
+								{...post}
+								index={index + 1}
+								deletePost={deletePost}
+							/>
+						</CSSTransition>)}
+				</TransitionGroup>
 				: <h3>Посты не найдены!</h3>}
 		</div>
 

@@ -5,3 +5,7 @@
 	justify-content: space-between;
 	border: 2px solid cornflowerblue;
 }
+
+.post :nth-child(1) {
+	margin-right: 10px;
+}
