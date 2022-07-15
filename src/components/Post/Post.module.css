@@ -4,6 +4,7 @@
 	display: flex;
 	justify-content: space-between;
 	border: 2px solid cornflowerblue;
+	align-items: center;
 }
 
 .post :nth-child(1) {

@@ -1,0 +1,12 @@
+.pageWrapper {}
+
+.page {
+	padding: 5px;
+	margin-right: 2px;
+	cursor: pointer;
+}
+
+.active {
+	font-weight: 700;
+	border: 1px solid cornflowerblue;
+}

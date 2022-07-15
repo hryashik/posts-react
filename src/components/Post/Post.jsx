@@ -6,7 +6,7 @@ function Post(props) {
 	return (
 		<div className={style.post}>
 			<div>
-				<strong>{props.index}. {props.title}</strong>
+				<strong>{props.id}. {props.title}</strong>
 				<div>{props.body}</div>
 			</div>
 			<MyButton onClick={() => props.deletePost(props.id)}>Удалить</MyButton>
