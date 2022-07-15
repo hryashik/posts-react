@@ -14,5 +14,13 @@ export const ServiceApi = {
 			console.log(e)
 		}
 
+	},
+	async getComments(id) {
+		try {
+			const response = await axios.get(`https://jsonplaceholder.typicode.com/posts/${id}/comments`)
+			return response
+		} catch (e) {
+			console.log(e)
+		}
 	}
 }

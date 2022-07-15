@@ -1,0 +1,23 @@
+.wrapper {
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: gainsboro;
+	border-bottom-left-radius: 10%;
+	border-bottom-right-radius: 10%;
+}
+
+.wrapper a {
+	text-transform: uppercase;
+	margin-right: 10px;
+}
+
+.wrapper a:visited {
+	text-decoration: none;
+	color: inherit;
+}
+
+.wrapper a:hover {
+	transform: scale(1.1);
+}

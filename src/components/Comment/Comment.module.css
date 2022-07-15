@@ -1,0 +1,19 @@
+.comment {
+	margin-top: 15px;
+	display: grid;
+	grid-template-columns: 250px 5fr;
+	margin-bottom: 20px;
+}
+
+.nameWrapper {
+	align-items: center;
+	max-width: 300px;
+	border-right: 2px solid black;
+	margin-right: 10px;
+	font-size: 16px;
+	word-wrap: break-word;
+}
+
+.description {
+	font-size: 18px;
+}
