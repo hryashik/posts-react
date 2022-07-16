@@ -10,7 +10,6 @@ function PostPage() {
 	const [postId, setPostId] = useState(params);
 	const [comments, setComments] = useState('')
 
-
 	useEffect(() => {
 		console.log('UEF PARAMS OTRABOTAL')
 		fetchComments(params)
