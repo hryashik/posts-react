@@ -17,6 +17,7 @@
 
 .modalContent input {
 	border-radius: 10px;
+	background-color: white;
 }
 
 .modalContent button {

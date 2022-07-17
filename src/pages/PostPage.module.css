@@ -2,9 +2,10 @@
 	margin: auto;
 	width: 1000px;
 	padding: 15px;
-	border: 2px solid cornflowerblue;
+	/* border: 2px solid rgb(96, 125, 180); */
 	border-radius: 15px;
 	box-shadow: 2px 5px 10px 0 rgba(0, 0, 0, 0.2);
+	background-color: ghostwhite;
 }
 
 .pageContent {
@@ -17,6 +18,7 @@
 .title {
 	margin-top: 20px;
 	font-size: 24px;
+	text-decoration: underline;
 }
 
 

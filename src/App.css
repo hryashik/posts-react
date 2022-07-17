@@ -4,16 +4,20 @@
 	box-sizing: border-box;
 }
 
+body {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
 .AppContent {
 	padding: 15px;
 	width: 800px;
 	margin: 0 auto;
+	background-color: ghostwhite;
+	border-radius: 15px;
 }
 
-.sortWrapper {
-	margin-bottom: 7px;
-	display: flex;
-	justify-content: space-between;
+.AppContent button:hover {
+	background-color: rgb(80, 104, 149);
 }
 
 .remove-btn {

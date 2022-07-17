@@ -1,0 +1,28 @@
+.sortWrapper {
+	margin: 13px 0;
+	display: flex;
+	justify-content: space-between;
+}
+
+.sortWrapper input {
+	border: none;
+	padding: 10px 15px;
+	border-radius: 7px;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+}
+
+.sortWrapper input:focus {
+	outline: 1px solid cornflowerblue;
+}
+
+.sortWrapper select {
+	outline: none;
+	border: none;
+	border-radius: 7px;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+	background-color: ghostwhite;
+}
+
+.sortWrapper select ::selection {
+	padding: 50px;
+}

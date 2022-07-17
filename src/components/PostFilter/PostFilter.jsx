@@ -1,6 +1,7 @@
 import React from 'react';
 import MyInput from '../commons/MyInput/MyInput';
 import MySelect from '../commons/MySelect/MySelect';
+import style from './PostFilter.module.css'
 
 function PostFilter({ filter, setFilter }) {
 	const options = [
@@ -9,7 +10,7 @@ function PostFilter({ filter, setFilter }) {
 	]
 
 	return (
-		<div className="sortWrapper">
+		<div className={style.sortWrapper}>
 			<MyInput
 				placeholder="Поиск по названию..."
 				value={filter.query}

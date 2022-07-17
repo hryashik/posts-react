@@ -3,8 +3,9 @@
 	padding: 15px;
 	display: flex;
 	justify-content: space-between;
-	border: 2px solid cornflowerblue;
+	border: 2px solid rgb(96, 125, 180);
 	align-items: center;
+	border-radius: 15px;
 }
 
 .post :nth-child(1) {

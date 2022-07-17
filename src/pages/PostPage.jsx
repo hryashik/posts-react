@@ -11,15 +11,12 @@ function PostPage() {
 	const [comments, setComments] = useState('')
 
 	useEffect(() => {
-		console.log('UEF PARAMS OTRABOTAL')
 		fetchComments(params)
 	}, [params]);
-
 	async function fetchComments(id) {
 		const response = await ServiceApi.getComments(id)
 		setComments([...response.data])
 	}
-	console.log(comments)
 	return (
 		<div className={style.pageWrapper}>
 			<span
@@ -31,7 +28,7 @@ function PostPage() {
 				<h3 className={style.title}>Пост №{postId}</h3>
 				{comments && <CommentsList commentsArray={comments} />}
 			</div>
-		</div>
+		</div >
 	);
 }
 
